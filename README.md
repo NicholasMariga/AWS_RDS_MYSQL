@@ -12,21 +12,26 @@ The bastion host runs a MySQL client that you can use to connect to the RDS inst
 
 ## Quick start (local)
 cd terraform
+
 terraform init
 
 terraform plan -out=tfplan
+
 terraform apply -auto-approve tfplan
 
 terraform output bastion_public_ip
+
 terraform output rds_endpoint
 
 ssh -i ~/.ssh/<your-private-key> ec2-user@$(terraform output -raw bastion_public_ip)
 
-# on bastion
+on bastion
 ./connect-rds.sh $(terraform output -raw rds_endpoint)
-# enter DB password when prompted
+
+enter DB password when prompted
 
 cd terraform
+
 terraform destroy -auto-approve
 
 
